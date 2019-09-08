@@ -1,0 +1,20 @@
+name: Build momo
+on: [push]
+
+jobs:
+  build_ubuntu-18_04_armv8:
+    name: Build momo for build_ubuntu-18.04_armv8
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: DOCKER_BUILDKIT=1 NOTTY=1 NOMOUNT=1 make ubuntu-18.04_armv8
+        working-directory: build
+        timeout-minutes: 120
+  build_macos:
+    name: Build momo for macos
+    runs-on: macOS-10.14
+    steps:
+      - uses: actions/checkout@master
+      - run: make macos
+        working-directory: build
+        timeout-minutes: 120
